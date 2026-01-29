@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="MARCIN FORTANC — spawanie, cięcie gazowe i obróbka metali. Rzetelnie i terminowo." />
+  <title>MARCIN FORTANC — Spawanie i obróbka metali</title>
+
+  <style>
+    :root{
+      --paper:#f3e9de;
+      --ink:#2a1f18;
+      --muted:#6f5f55;
+      --wine:#7a2d38;
+      --copper:#b87045;
+      --sage:#4a6a5e;
+      --line: rgba(42,31,24,.12);
+      --card: rgba(255,250,245,.75);
+      --shadow: 0 18px 50px rgba(42,31,24,.14);
+      --glass: rgba(255,248,240,.60);
+      --r: 22px;
+      --r-soft: 26px 18px 30px 20px;
+      --r-card: 20px 26px 18px 30px;
+      --max: 1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 520px at 10% 0%, rgba(184,112,69,.20), transparent 62%),
+        radial-gradient(800px 520px at 90% 10%, rgba(122,45,56,.16), transparent 62%),
+        radial-gradient(900px 520px at 50% 110%, rgba(74,106,94,.14), transparent 68%),
+        var(--paper);
+      line-height: 1.65;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max); margin:0 auto; padding:26px}
+
+    /* ======= Topbar ======= */
+    .topbar{
+      position: sticky; top:0; z-index: 50;
+      background: rgba(243,233,222,.80);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar::after{
+      content:"";
+      display:block;
+      height:2px;
+      background: linear-gradient(90deg, transparent, rgba(184,112,69,.35), rgba(122,45,56,.30), transparent);
+      opacity:.9;
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding: 10px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight: 900;
+      letter-spacing: .02em;
+      padding-left: 8px;
+    }
+    .brand-meta{display:flex; flex-direction:column; line-height:1.1}
+    .brand-title{
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--ink);
+    }
+    .brand-sub{
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .nav-rail{
+      display:flex; gap:8px; align-items:center;
+      padding: 6px;
+      border-radius: 18px 26px 18px 30px;
+      background: rgba(255,255,255,.35);
+      border: 1px solid rgba(42,31,24,.10);
+    }
+    .links{display:flex; gap:6px; flex-wrap:wrap}
+    .links a{
+      font-weight: 850; font-size: 13px;
+      color: var(--muted);
+      padding: 7px 12px;
+      border-radius: 12px 18px 12px 20px;
+      background: rgba(255,255,255,.40);
+      border: 1px solid rgba(42,31,24,.08);
+    }
+    .links a:hover{
+      color: var(--ink);
+      background: rgba(184,112,69,.18);
+      border-color: rgba(184,112,69,.30);
+    }
+
+    .actions{display:flex; gap:8px; align-items:center}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding: 11px 14px;
+      border-radius: 16px 20px 14px 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.50);
+      font-weight: 900;
+      cursor:pointer;
+      transition: transform .14s ease, box-shadow .14s ease, background .14s ease;
+    }
+    .btn:hover{transform: translateY(-1px); box-shadow: 0 12px 28px rgba(42,31,24,.18)}
+    .btn.primary{
+      border: 0;
+      color: white;
+      background: linear-gradient(135deg, var(--wine), var(--copper));
+    }
+    .hamburger{display:none}
+
+    /* ======= Hero ======= */
+    .hero{
+      padding: 34px 0 10px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items:stretch;
+    }
+    .frame{
+      border-radius: var(--r-soft);
+      border: 1px solid var(--line);
+      background: var(--glass);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .frame::before{
+      content:"";
+      position:absolute; inset: -120px -140px auto auto;
+      width: 420px; height: 320px;
+      background:
+        radial-gradient(closest-side, rgba(122,45,56,.18), transparent 70%),
+        radial-gradient(closest-side, rgba(184,112,69,.18), transparent 70%),
+        radial-gradient(closest-side, rgba(74,106,94,.14), transparent 70%);
+      transform: rotate(12deg);
+      filter: blur(.2px);
+    }
+    .hero-left{padding: 22px; position:relative; transform: translateY(6px)}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(74,106,94,.14);
+      border: 1px solid rgba(74,106,94,.24);
+      color: #2f4a42;
+      font-weight: 950;
+      font-size: 13px;
+      letter-spacing: .01em;
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+    }
+    .lead{
+      margin:0;
+      color: var(--muted);
+      font-weight: 750;
+      font-size: 17px;
+      max-width: 70ch;
+    }
+    .cta{
+      display:flex; gap:10px; flex-wrap:wrap; margin-top: 16px;
+    }
+    .fine{
+      margin-top: 14px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      color: var(--muted);
+      font-weight: 850;
+      font-size: 14px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 9px 11px;
+      border-radius: 999px;
+      border: 1px dashed rgba(42,31,24,.18);
+      background: rgba(255,255,255,.50);
+    }
+
+    .hero-right{
+      display:grid; gap: 12px;
+      padding: 16px;
+      transform: translateY(-6px);
+    }
+    .card{
+      border-radius: var(--r-card);
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: 0 12px 30px rgba(42,31,24,.18);
+      padding: 16px;
+    }
+    .title-row{
+      display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:baseline;
+    }
+    .label{
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: rgba(42,31,24,.55);
+    }
+    .big{
+      font-size: 18px;
+      font-weight: 950;
+    }
+    .contact-lines{
+      margin-top: 10px;
+      color: var(--muted);
+      font-weight: 850;
+      line-height: 1.9;
+    }
+    .inline{
+      text-decoration: underline;
+      text-decoration-color: rgba(42,31,24,.28);
+      font-weight: 950;
+      color: var(--ink);
+    }
+
+    /* mini kafle w prawym boxie */
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+    .mini{
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:12px;
+      background: rgba(255,255,255,.06);
+    }
+    .mini .t{font-weight:950}
+    .mini .s{color:var(--muted); font-weight:850; font-size:13px; margin-top:2px}
+
+    /* ======= Sections ======= */
+    section{padding: 34px 0}
+    .section-head{
+      display:flex; justify-content:space-between; gap:14px; align-items:flex-end;
+      margin-bottom: 14px;
+    }
+    .section-head h2{margin:0; font-size: 26px; letter-spacing: -.01em;}
+    .section-head p{margin:0; color: var(--muted); font-weight: 780; max-width: 76ch;}
+
+    /* ======= USŁUGI (3 rozpisane bloczki) ======= */
+    .grid3{display:grid; grid-template-columns:1.05fr .95fr 1.1fr; gap: 14px}
+    .service{
+      border-radius: 24px 18px 28px 20px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: 0 12px 30px rgba(42,31,24,.18);
+      padding: 18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .service:nth-child(2){
+      transform: translateY(10px);
+      border-radius: 18px 26px 20px 30px;
+    }
+    .service:nth-child(3){
+      transform: translateY(-8px);
+      border-radius: 30px 18px 26px 20px;
+    }
+    .service::after{
+      content:"";
+      position:absolute; inset:auto -40px -40px auto;
+      width: 160px; height: 160px;
+      background: radial-gradient(circle at 30% 30%, rgba(184,112,69,.22), transparent 65%);
+      border-radius: 999px;
+    }
+    .tag{
+      display:inline-flex;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(122,45,56,.12);
+      border: 1px solid rgba(122,45,56,.22);
+      color: #5d1f2a;
+      font-weight: 950;
+      font-size: 12px;
+    }
+    .service h3{margin:10px 0 6px; font-size: 18px}
+    .service p{margin:0; color: var(--muted); font-weight: 760}
+
+    /* O mnie / Jak pracuję */
+    .split{display:grid; grid-template-columns: 1.05fr .95fr; gap: 14px;}
+    .split .card:first-child{transform: translateY(8px)}
+    .split .card:last-child{transform: translateY(-6px)}
+    .list{margin: 10px 0 0; padding: 0 0 0 18px; color: var(--muted); font-weight: 800;}
+
+    /* ======= GALERIA (2 zdjęcia) ======= */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+    .gallery-item{
+      border-radius: 22px 18px 26px 20px;
+      overflow:hidden;
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: 0 12px 30px rgba(42,31,24,.18);
+    }
+    .gallery-item img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      display:block;
+    }
+    .gallery-item figcaption{
+      padding:10px 12px;
+      font-size:13px;
+      font-weight:850;
+      color:var(--muted);
+      background: rgba(255,255,255,.6);
+    }
+
+    /* Kontakt */
+    .contact-grid{display:grid; grid-template-columns: 1.1fr .9fr; gap: 14px;}
+    .contact-grid .card:first-child{transform: translateY(6px)}
+    .contact-grid .card:last-child{transform: translateY(-6px)}
+
+    .footer{
+      border-top: 1px solid var(--line);
+      padding: 18px 0 48px;
+      color: var(--muted);
+      font-weight: 850;
+    }
+    .foot{display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+      h1{font-size: 36px}
+      .grid3{grid-template-columns:1fr}
+      .split{grid-template-columns:1fr}
+      .contact-grid{grid-template-columns:1fr}
+      .hero-left,.hero-right,.service,.split .card,.contact-grid .card{transform:none}
+      .nav-rail{display:none}
+      .links{display:none}
+      .hamburger{display:inline-flex}
+      .gallery{grid-template-columns:1fr}
+      .gallery-item img{height:220px}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#top" aria-label="Strona główna">
+        <span class="brand-meta">
+          <span class="brand-title">MARCIN FORTANC</span>
+          <span class="brand-sub">spawanie • obróbka metali • cięcie gazowe</span>
+        </span>
+      </a>
+
+      <div class="nav-rail">
+        <nav class="links" aria-label="Nawigacja">
+          <a href="#uslugi">Usługi</a>
+          <a href="#omnie">O mnie</a>
+          <a href="#jak">Jak pracuję</a>
+          <a href="#zdjecia">Zdjęcia</a>
+          <a href="#kontakt">Kontakt</a>
+        </nav>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="tel:+48570135713">Zadzwoń</a>
+        <a class="btn primary" href="#kontakt">Kontakt</a>
+        <button class="btn hamburger" id="menuBtn" aria-label="Otwórz menu">Menu</button>
+      </div>
+    </div>
+
+    <div class="container" id="mobileMenu" style="display:none; padding-top:0">
+      <div class="card" style="padding:12px">
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="btn" href="#uslugi">Usługi</a>
+          <a class="btn" href="#omnie">O mnie</a>
+          <a class="btn" href="#jak">Jak pracuję</a>
+          <a class="btn" href="#zdjecia">Zdjęcia</a>
+          <a class="btn primary" href="#kontakt">Kontakt</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- HERO -->
+    <div class="hero">
+      <section class="frame hero-left" aria-label="Wprowadzenie">
+        <div class="kicker">🧰 Usługi spawalnicze i obróbka metali • rzetelnie • terminowo</div>
+
+        <h1>Obróbka metali</h1>
+
+        <p class="lead">
+          Zajmuję się profesjonalną obróbką metali — przygotowaniem, cięciem oraz łączeniem elementów stalowych.
+          Pracuję w oparciu o doświadczenie i sprawdzone metody, realizując zarówno proste,
+          jak i bardziej wymagające projekty.
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="mailto:fortanc.marcin@wp.pl?subject=Zapytanie%20—%20spawanie%20i%20obróbka%20metali">Napisz email</a>
+          <a class="btn" href="tel:+48570135713">Zadzwoń</a>
+          <a class="btn" href="#uslugi">Zobacz usługi</a>
+        </div>
+
+        <div class="fine">
+          <span class="pill">✅ Dokładność i powtarzalność</span>
+          <span class="pill">🧲 Trwałe spoiny</span>
+          <span class="pill">⏱️ Terminowość</span>
+        </div>
+      </section>
+
+      <aside class="frame hero-right" aria-label="Szybkie informacje">
+        <div class="card">
+          <div class="title-row">
+            <span class="label">Kontakt</span>
+            <span class="big">MARCIN FORTANC</span>
+          </div>
+          <div class="contact-lines">
+            📞 <a class="inline" href="tel:+48570135713">+48 570 135 713</a><br/>
+            ✉️ <a class="inline" href="mailto:fortanc.marcin@wp.pl">fortanc.marcin@wp.pl</a><br/>
+            🧾 NIP: <span class="inline">9580938867</span><br/>
+            🧾 REGON: <span class="inline">19287579000000</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="title-row">
+            <span class="label">Szybko</span>
+            <span class="big">Zakres prac</span>
+          </div>
+
+          <div class="mini-grid">
+            <div class="mini">
+              <div class="t">Spawanie</div>
+              <div class="s">konstrukcje i detale</div>
+            </div>
+            <div class="mini">
+              <div class="t">Cięcie gazowe</div>
+              <div class="s">tlen + gaz palny</div>
+            </div>
+            <div class="mini">
+              <div class="t">Przygotowanie</div>
+              <div class="s">pod montaż/spawanie</div>
+            </div>
+            <div class="mini">
+              <div class="t">Doradztwo</div>
+              <div class="s">dobór technologii</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- USŁUGI -->
+    <section id="uslugi">
+      <div class="section-head">
+        <h2>Zakres usług</h2>
+        <p>Konkretnie: cięcie, spawanie i przygotowanie elementów stalowych — bez ściemy i bez “pakietów”.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="service">
+          <span class="tag">Cięcie</span>
+          <h3>Cięcie gazowe metali</h3>
+          <p>
+            Cięcie tlenowe z użyciem gazów palnych (acetylen, propan). Precyzyjne przygotowanie stali
+            o różnych grubościach do dalszej obróbki, spawania lub montażu.
+          </p>
+        </div>
+
+        <div class="service">
+          <span class="tag">Spawanie</span>
+          <h3>Spawanie metali i konstrukcji</h3>
+          <p>
+            Drobne prace spawalnicze i większe realizacje: konstrukcje nośne, elementy techniczne,
+            części użytkowe. Liczy się trwałość spoin i estetyka.
+          </p>
+        </div>
+
+        <div class="service">
+          <span class="tag">Obróbka</span>
+          <h3>Przygotowanie i dopasowanie</h3>
+          <p>
+            Dopasowanie elementów, przygotowanie krawędzi, prace wykończeniowe. Doradztwo technologiczne:
+            co zrobić i jak, żeby było solidnie i bez problemów w montażu.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- O MNIE -->
+    <section id="omnie">
+      <div class="section-head">
+        <h2>O mnie</h2>
+        <p>konkretnie — bez podwykonawców i przypadkowych ekip.</p>
+      </div>
+
+      <div class="card">
+        <p style="margin:0; color:var(--muted); font-weight:800">
+          Prowadzę działalność opartą na doświadczeniu i rzetelnej wiedzy technicznej.
+          Każde zlecenie realizuję osobiście, dbając o jakość wykonania, trwałość oraz bezpieczeństwo gotowych elementów.
+          Doradzam na każdym etapie: od doboru technologii, przez wykonanie, aż po finalne wykończenie.
+        </p>
+      </div>
+    </section>
+
+    <!-- JAK PRACUJĘ -->
+    <section id="jak">
+      <div class="section-head">
+        <h2>Jak pracuję</h2>
+        <p>Prosty, przewidywalny proces — żebyś wiedział co i kiedy będzie zrobione.</p>
+      </div>
+
+      <div class="split">
+        <div class="card">
+          <div class="label">1. Ustalenie</div>
+          <div class="big" style="margin-top:6px">Kontakt i szybka ocena</div>
+          <ul class="list">
+            <li>Krótki opis zlecenia / zdjęcia / wymiary</li>
+            <li>Doradztwo technologiczne (cięcie/spawanie/obróbka)</li>
+            <li>Ustalenie terminu realizacji</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <div class="label">2. Wykonanie</div>
+          <div class="big" style="margin-top:6px">Dokładnie i czysto</div>
+          <ul class="list">
+            <li>Przygotowanie elementów pod spawanie/montaż</li>
+            <li>Spawanie z dbałością o spoinę i geometrię</li>
+            <li>Wykończenie i kontrola końcowa</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- zdjecia -->
+    <section id="zdjecia">
+      <div class="section-head">
+        <h2>Zdjęcia</h2>
+
+      </div>
+
+      <div class="gallery">
+        <figure class="gallery-item">
+          <img src="img/zdjecie1.png" alt="Spawanie">
+          <figcaption>Spawanie</figcaption>
+        </figure>
+
+        <figure class="gallery-item">
+          <img src="img/zdjecie2.png" alt="Port">
+          <figcaption>Port</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section id="kontakt">
+      <div class="section-head">
+        <h2>Kontakt</h2>
+        <p>Telefon i email — bez formularzy. Odpisuję możliwie szybko.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card">
+          <div class="label">Szybki kontakt</div>
+          <div style="margin-top:10px; color:var(--muted); font-weight:850; line-height:1.9">
+            📞 <a class="inline" href="tel:+48570135713">+48 570 135 713</a><br/>
+            ✉️ <a class="inline" href="mailto:fortanc.marcin@wp.pl">fortanc.marcin@wp.pl</a><br/>
+          </div>
+
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px">
+            <a class="btn primary" href="tel:+48570135713">Zadzwoń</a>
+            <a class="btn" href="mailto:fortanc.marcin@wp.pl?subject=Zapytanie%20—%20spawanie%20i%20obróbka%20metali">Wyślij email</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="label">Dane firmy</div>
+          <div class="big" style="margin-top:8px">MARCIN FORTANC</div>
+          <p style="margin:10px 0 0; color:var(--muted); font-weight:800; line-height:1.9">
+            NIP: 9580938867<br/>
+            REGON: 19287579000000<br/>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="foot">
+        <span>© <span id="year"></span> MARCIN FORTANC</span>
+        <span><a href="#top">Do góry ↑</a></span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    // mobile menu
+    const btn = document.getElementById('menuBtn');
+    const menu = document.getElementById('mobileMenu');
+    if(btn){
+      btn.addEventListener('click', () => {
+        const open = menu.style.display === 'block';
+        menu.style.display = open ? 'none' : 'block';
+        btn.textContent = open ? 'Menu' : 'Zamknij';
+      });
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
